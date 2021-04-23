@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react';
-import { ActivityIndicator, Button, Text, useWindowDimensions, ScrollView, View } from 'react-native';
+import { ActivityIndicator, useWindowDimensions, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
 import { CardMovie } from '../components/CardMovie';
@@ -38,14 +38,6 @@ export const HomeScreen = () => {
                 <HorizontalSlider title='Populares' movies={popular} />
                 <HorizontalSlider title='Top Rated' movies={topRated} />
                 <HorizontalSlider title='Up Coming' movies={upComing} />
-
-                {/* <CardMovie movie= {moviesCinema[0]} /> */}
-                <Text>Home Screen</Text>
-                {/* <Text>{nowPlaying.title}</Text> */}
-                <Button 
-                    title="Go to detail"
-                    onPress={() => navigation.navigate('DetailsScreen')}
-                    />
             </View>
         </ScrollView>
     )
