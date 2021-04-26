@@ -23,11 +23,11 @@ export const FadeScreen = () => {
 
             <Button 
                 title="Animated In"
-                onPress={fadeIn}
+                onPress={()=>fadeIn()}
             />
             <Button 
                 title="Animated Out"
-                onPress={fadeOut}
+                onPress={()=>fadeOut()}
             />
         </View>
     )

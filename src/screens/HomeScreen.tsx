@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ActivityIndicator, useWindowDimensions, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
@@ -11,22 +11,30 @@ import { styles } from '../theme/main';
 
 import ImageColors from "react-native-image-colors";
 import { getImageColors } from '../helpers/getColores';
+import { GradientContext } from '../context/GradientContext';
 
 export const HomeScreen = () => {
     const navigation = useNavigation();
     const { top } = useSafeAreaInsets();
     const { width }  = useWindowDimensions();
+    const { setMainColors } = useContext(GradientContext);
 
+    
     const {nowPlaying, popular, topRated, upComing, isLoading} = useMovies();
-
+    
     const getPosterColors = async(i:number) => {
         const movie = nowPlaying[i];
         const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`;
         const [primary, secondary] = await getImageColors(uri)
-
-        console.log(primary, secondary);
+        
+        setMainColors({primary, secondary});
     }
-
+    
+    useEffect(() => {
+        if(nowPlaying.length > 0){
+            getPosterColors(0);
+        }
+    }, [nowPlaying])
     if(isLoading){
         return (
             <View style={styles.loading}>
